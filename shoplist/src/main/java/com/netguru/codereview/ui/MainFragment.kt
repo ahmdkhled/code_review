@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // replace this with lifecycle owner
-        viewModel!!.shopLists.observe(this, { lists ->
+        viewModel!!.shopLists.observe(viewLifecycleOwner, { lists ->
             // it is better to use viewbinding for binding views
             val progressBar = view.findViewById<ProgressBar>(R.id.message)
             val latestIcon = view.findViewById<ImageView>(R.id.latest_list_icon)
@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
 
              //adapter.submitList(shopLists)
         })
-        viewModel!!.events().observe(this, {
+        viewModel!!.events().observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
